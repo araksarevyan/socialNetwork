@@ -2,14 +2,15 @@
 <html lang="en">
 
 <head>
-	<script src="script.js"></script>
 	<link rel="stylesheet" href="css/style.css">
-	<meta charset="UTF-8">
+	<!-- <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+	<script src="script.js"></script>
+	<title>Document</title> -->
 </head>
 
 <body>
+	<h1>Blah blah blah</h1>
 	<div class="grid">
 		<% for (let data of resData) { %>
 			<article class="card product-item">
@@ -32,7 +33,31 @@
 			</article>
 			<% } %>
 	</div>
-	<script src="script.js"></script>
-</body>
 
+
+
+	<main>
+		<form class="product-form" action="/admin/add-product" method="POST">
+			<div class="form-control">
+				<label for="title">Title</label>
+				<input type="text" name="title" id="title">
+			</div>
+			<!-- <div class="form-control">
+				<label for="imageUrl">Image URL</label>
+				<input type="text" name="imageUrl" id="imageUrl">
+			</div>
+			<div class="form-control">
+				<label for="price">Price</label>
+				<input type="number" name="price" id="price" step="0.01">
+			</div>
+			<div class="form-control">
+				<label for="description">Description</label>
+				<textarea name="description" id="description" rows="5"></textarea>
+			</div> -->
+
+			<button class="btn" type="submit">Add Product</button>
+			<a href="/" class="btn" type="submit">Edit</a>
+			<button class="btn" type="submit">Delete</button>
+		</form>
+</body>
 </html>

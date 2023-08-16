@@ -1,14 +1,1 @@
-[
-	{
-		"title": "book",
-		"price": "20",
-		"imageUrl": "https://cdn.pixabay.com/photo/2015/11/19/21/10/glasses-1052010_640.jpg",
-		"description": "sdsda"
-	},
-	{
-		"title": "book",
-		"price": "20",
-		"imageUrl": "https://cdn.pixabay.com/photo/2015/11/19/21/10/glasses-1052010_640.jpg",
-		"description": "sdsda"
-	}
-]
+[{"title":"A Book","imageUrl":"https://www.publicdomainpictures.net/pictures/10000/velka/1-1210009435EGmE.jpg","description":"This is an awesome book!","price":"19"}]
