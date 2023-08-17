@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<script src="script.js"></script>
+	<link rel="stylesheet" href="css/style.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<div class="grid">
+		<% for (let data of resData) { %>
+			<article class="card product-item">
+				<header class="card__header">
+					<h1 class="product__title">
+						<%= data.title %>
+					</h1>
+				</header>
+				<div class="card__image">
+					<img src="<%= data.imageUrl %>" alt="<%= data.title %>">
+				</div>
+				<div class="card__content">
+					<h2 class="product__price">$
+						<%= data.price %>
+					</h2>
+					<p class="product__description">
+						<%= data.description %>
+					</p>
+				</div>
+			</article>
+			<% } %>
+	</div>
+	<script src="script.js"></script>
+</body>
+
+</html>
