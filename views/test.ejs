@@ -18,11 +18,11 @@
 						<%= data.title %>
 					</h1>
 				</header>
-				<a href="/" class="btn" type="submit">Edit</a>
-				<!-- <form class="product-form" action="/admin/delete-product" method="POST">
-					<input type="text" name="id" value="<%= data.id %>" style="display:none">
-					<button class="btn" type="submit">Delete</button>
-				</form> -->
+				<!-- <form class="product-form" action="/admin/edit-product"  method="POST"> -->
+					<!-- <input type="text" name="id" value="<%= data.id %>"> -->
+					<a href="/admin/edit-product/<%= data.id %>" class="btn" type="submit">Edit</a>
+				<!-- </form> -->
+
 				<form class="product-form" action="/admin/delete-product/<%= data.id %>" method="POST">
 					<button class="btn" type="submit">Delete</button>
 				</form>
