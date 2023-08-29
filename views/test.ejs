@@ -3,6 +3,7 @@
 
 <head>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="script.js"></script>
@@ -10,33 +11,151 @@
 </head>
 
 <body>
+	<main>
+		<form class="post-form" action="/admin/add-product" method="POST">
+			<div class="form-control">
+				<label for="firstName">First Name</label>
+				<input type="text" name="firstName" id="title">
+			</div>
+			<div class="form-control">
+				<label for="lastName">Last Name</label>
+				<input type="text" name="lastName" id="title">
+			</div>
+			<div class="form-control">
+				<label for="imageUrl">Image URL</label>
+				<input type="text" name="imageUrl" id="imageUrl" value="">
+			</div>
+			<div class="form-control">
+				<label for="postArea">Your Post</label>
+				<input type="text" name="postArea" id="postArea" value="">
+			</div>
+			<div>
+				<button class="postBtn" type="submit">Post</button>
+			</div>
+
+		</form>
+	</main>
 	<div class="grid">
 		<% for (let data of resData) { %>
 			<article class="card product-item">
-				<header class="card__header">
-					<h1 class="product__title">
-						<%= data.title %>
-					</h1>
-				</header>
-				<!-- <form class="product-form" action="/admin/edit-product"  method="POST"> -->
-					<!-- <input type="text" name="id" value="<%= data.id %>"> -->
-					<a href="/admin/edit-product/<%= data.id %>" class="btn" type="submit">Edit</a>
-				<!-- </form> -->
+				<div class="card__header">
+					<div class="header-area">
+						<div class="header-area-img">
+							<img src="https://img.freepik.com/premium-vector/human-profile-icon-genderless-vector-illustration_276184-158.jpg"
+								alt="">
+						</div>
+						<div class="header-area-firstName">
+							<div class="header-area-firs-last-name">
+								<h3 class="firstName-area">
+									<%= data.firstName %>
+								</h3>
+								<h3 class="lastName-area">
+									<%= data.lastName %>
+								</h3>
+							</div>
+							<div class="header-area-time">
+								<p>
+									<%= data.value %>
+								</p>
+							</div>
+						</div>
+						<div class="header-area-edit-delete">
+							<form class="product-form" action="/admin/delete-product/<%= data.id %>" method="POST">
+								<button class="btn" type="submit"><i class="fa fa-times"
+										aria-hidden="true"></i></button>
+							</form>
+							<a href="/admin/edit-product/<%= data.id %>" class="btn" type="submit"><i
+									class="fa fa-ellipsis-h" aria-hidden="true"></i>
+							</a>
+						</div>
+					</div>
 
-				<form class="product-form" action="/admin/delete-product/<%= data.id %>" method="POST">
-					<button class="btn" type="submit">Delete</button>
-				</form>
+					<div class="post-text-area">
+						<p>
+							<%= data.postArea %>
+						</p>
+					</div>
+					<div class="post-image">
+						<img src="<%= data.imageUrl %>" alt="<%= data.firstName %>">
+					</div>
+					<div class="icons-comments-part">
+						<div class="icons-comments-part-icons">
+							<i class="fa fa-thumbs-up" aria-hidden="true"></i>
+							<i class="fa fa-heart" aria-hidden="true"></i>
+							<%= data.clickCount %>
+						</div>
+						<div class="icons-comments-part-comment">
+							<p>1 comment 24 shares</p>
+						</div>
+					</div>
+					<div class="like-comment-share-icons">
+						<form class="fa-thumbs-icon" action="/admin/posts-add-like/<%= data.id %>" method="POST">
+							<button class="btn" type="submit"><i class="fa fa-thumbs-o-up"
+									aria-hidden="true">Like</i></button>
+						</form>
+						<form class="fa-comment-icon" action="/admin/posts-write-comment/<%= data.id %>" method="POST">
+							<button class="btn" type="submit"><i class="fa fa-comment-o"
+									aria-hidden="true">Comment</i></button>
+						</form>
+						<form class="fa-share-icon" action="/admin/posts-write-comment/<%= data.id %>" method="POST">
+							<button class="btn" type="submit"><i class="fa fa-share"
+									aria-hidden="true">Share</i></button>
+						</form>
+					</div>
+					<div class="new-comment">
+						<div class="new-comment-image">
+							<img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Facebook_f_logo_%282021%29.svg/1200px-Facebook_f_logo_%282021%29.svg.png"
+								alt="">
+						</div>
+						<div class="new-comment-text-area-like-reply">
+							<div class="new-comment-text-area">
+								<div class="new-comment-name">
+									<h5>Name</h5>
+									<h5>Lastname</h5>
+								</div>
+								<div class="new-comment-text">
+									<form class="product-form" action="/admin/posts-write-comment/<%= data.id %>" method="POST">
+										<input type="text" name="postArea" id="postArea" value="">
+										<button class="btn" type="submit"></button>
+									</form>
+									
+								</div>
+							</div>
+							<div class="new-comment-like-reply">
+								<ul>
+									<li>17h</li>
+									<li>Like</li>
+									<li>Reply</li>
+								</ul>
+							</div>
+						</div>
+
+					</div>
+					<div class="writing-comment-area">
+						<div class="writing-comment-area-image">
+							<img src="https://img.freepik.com/premium-vector/human-profile-icon-genderless-vector-illustration_276184-158.jpg"
+								alt="">
+						</div>
+						<div class="writing-comment-area-input-icons">
+							<div class="writing-comment-area-input">
+								<input id="input" autocomplete="off" placeholder="Write a comment..." />
+								<div class="writing-comment-area-icons">
+									<i class="fa fa-star" aria-hidden="true"></i>
+									<i class="fa fa-smile-o" aria-hidden="true"></i>
+									<i class="fa fa-camera" aria-hidden="true"></i>
+									<i class="fa fa-git-square" aria-hidden="true"></i>
+									<i class="fa fa-smile-o" aria-hidden="true"></i>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+
 			</article>
 			<% } %>
 	</div>
-	<main>
-		<form class="product-form" action="/admin/add-product" method="POST">
-			<div class="form-control">
-				<label for="title">Title</label>
-				<input type="text" name="title" id="title">
-			</div>
-			<button class="btn" type="submit">Add Product</button>
-		</form>
 </body>
 
 </html>

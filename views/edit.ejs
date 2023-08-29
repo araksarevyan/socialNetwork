@@ -3,6 +3,7 @@
 
 <head>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -10,10 +11,34 @@
 </head>
 
 <body>
-	<form class="product-form" action="/admin/edit-product/<%= data.id %>" method="POST">
+	<main>
+		<form class="post-form" action="/admin/edit-product/<%= data.id %>" method="POST">
+			<div class="form-control">
+				<label for="firstName">First Name</label>
+				<input type="text" name="firstName" id="title" value="<%= data.firstName %>">
+			</div>
+			<div class="form-control">
+				<label for="lastName">Last Name</label>
+				<input type="text" name="lastName" id="title" value="<%= data.lastName %>">
+			</div>
+			<div class="form-control">
+				<label for="imageUrl">Image URL</label>
+				<input type="text" name="imageUrl" id="imageUrl" value="<%= data.imageUrl %>">
+			</div>
+			<div class="form-control">
+				<label for="postArea">Your Post</label>
+				<input type="text" name="postArea" id="postArea" value="<%= data.postArea %>">
+			</div>
+			<div>
+				<button class="postBtn" type="submit">Update Product</button>
+			</div>
+
+		</form>
+	</main>
+	<!-- <form class="product-form" action="/admin/edit-product/<%= data.id %>" method="POST">
 			<input type="text"  id="title" value="<%= data.title %>" name="title">
 		<button class="btn" type="submit">Update Product</button>
-	</form>
+	</form> -->
 	<script src="script.js"></script>
 </body>
 

@@ -4,6 +4,7 @@ const http = require('http');
 const server = http.createServer(app);
 var fs = require("fs");
 const bodyParser = require('body-parser');
+const date = require('date-and-time')
 
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -59,8 +60,11 @@ app.post('/admin/edit-product/:id', (req, res, next) => {
 		let editData = JSON.parse(data);
 
 		for (let obj of editData) {
-			if (obj.id == id) {
-				obj.title = req.body.title;	
+			if (obj.id === id) {
+				obj.firstName = req.body.firstName;
+				obj.lastName = req.body.lastName;
+				obj.imageUrl = req.body.imageUrl;
+				obj.postArea = req.body.postArea;
 			}
 		}
 		fs.writeFile("info.json", JSON.stringify(editData), function () { });
@@ -68,6 +72,43 @@ app.post('/admin/edit-product/:id', (req, res, next) => {
 	res.redirect('/');
 });
 
+app.post('/admin/posts-add-like/:id', (req, res, next) => {
+	let id = req.params.id;
+	fs.readFile(__dirname + '/info.json', 'utf8', function (err, data) {
+		if (err) {
+			return err;
+		}
+		let editData = JSON.parse(data);
+		for (let obj of editData) {
+			if (obj.id == id) {
+				console.log(obj.clickCount);
+				obj.clickCount = +obj.clickCount + 1;
+
+			}
+		}
+		fs.writeFile("info.json", JSON.stringify(editData), function () { });
+	});
+	res.redirect('/');
+});
+
+app.post('/admin/posts-write-comment/:id', (req, res, next) => {
+	let id = req.params.id;
+	fs.readFile(__dirname + '/info.json', 'utf8', function (err, data) {
+		if (err) {
+			return err;
+		}
+		let editData = JSON.parse(data);
+		for (let obj of editData) {
+			if (obj.id == id) {
+				console.log(obj.clickCount);
+				obj.clickCount = +obj.clickCount + 1;
+
+			}
+		}
+		fs.writeFile("info.json", JSON.stringify(editData), function () { });
+	});
+	res.redirect('/');
+});
 
 app.get('/', (req, res, next) => {
 	fs.readFile(__dirname + '/info.json', "utf8", function (err, data) {
@@ -82,10 +123,18 @@ app.get('/', (req, res, next) => {
 });
 
 app.post('/admin/add-product', (req, res, next) => {
-	const title = req.body.title;
+	const firstName = req.body.firstName;
+	const lastName = req.body.lastName;
+	const imageUrl = req.body.imageUrl;
+	const postArea = req.body.postArea;
+	const value = date.format((new Date()), 'YYYY/MM/DD').toString();
 	const id = getRandomInt().toString();
 	obj = {
-		title: title,
+		firstName: firstName,
+		lastName: lastName,
+		imageUrl: imageUrl,
+		postArea: postArea,
+		value: value,
 		id: id
 	};
 	fs.readFile(__dirname + '/info.json', function (err, fileContent) {
@@ -104,6 +153,7 @@ function getRandomInt(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-server.listen(3006, () => {
-	console.log('listening on localhost:3006');
+
+server.listen(3007, () => {
+	console.log('listening on localhost:3007');
 });
