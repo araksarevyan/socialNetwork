@@ -22,9 +22,15 @@ form {
 .grid {
   width: 800px;
   height: 830px;
-  margin: 0;
+  margin: auto;
+  border-radius: 20px;
   justify-content: space-around;
   align-items: stretch;
+}
+
+.card {
+  border-radius: 15px;
+  box-shadow: 0 0 10px #B2BEB5;
 }
 
 .post-form {
@@ -80,7 +86,7 @@ textarea {
   font-size: 15px;
 }
 
-.header-area-firs-last-name{
+.header-area-firs-last-name {
   display: flex;
 }
 
@@ -213,10 +219,13 @@ a {
   object-fit: fill;
   margin: 5px 0 10px 10px
 }
-.new-comment-text>input{
+
+.new-comment-text>p {
   border: none;
+  border-radius: 25px;
   background-color: #f0f2f5;
   margin: 0 0 0 10px;
+  padding-left: 10px;
 }
 
 .new-comment-text-area-like-reply {
@@ -224,10 +233,12 @@ a {
 
 }
 
-.new-comment-text-area>h5,p {
+.new-comment-text-area>h5,
+p {
   margin: 0 0 0 20px;
 
 }
+
 .new-comment-name {
   margin: 0 0 0 20px;
 }
@@ -238,7 +249,10 @@ a {
   border-radius: 25px;
   width: 600px;
   height: 45px;
+}
 
+.comment-edit-delete {
+  display: flex;
 }
 
 .new-comment-name {
@@ -284,8 +298,8 @@ li {
   display: flex;
 }
 
-.writing-comment-area-input>input {
-  width: 640px;
+.writing-comment-area-input>form>input {
+  width: 600px;
   height: 25px;
   border: none;
   border-radius: 15px;
@@ -298,10 +312,6 @@ li {
 .writing-comment-area-icons {
   display: inline;
   background-color: #f0f2f5;
-}
-
-.card {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
 }
 
 .card__header h1 {
@@ -323,4 +333,15 @@ li {
 .btn:hover,
 .btn:active {
   background-color: #bfbfc1;
+}
+
+.edit-form>input {
+  width: 500px;
+  height: 20px;
+  font-size: 18px;
+  background-color: #f0f2f5;
+  border: none;
+  outline: none;
+  margin: 0 0 0 20px;
+  border-radius: 15px;
 }
