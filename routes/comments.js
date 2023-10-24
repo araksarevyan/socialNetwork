@@ -8,22 +8,15 @@ let commentsArr = [];
 router.post('/admin/deleteComment/:postId/:commentId', function (req, res, next) {
 	let postId = req.params.postId;
 	let commentId = req.params.commentId;
-	fs.readFile('comments.json', (err, data) => {
-		if (err) {
-			return;
-		}
-		let updatedComment = JSON.parse(data);
+	let updatedComment = readJsonFile('comments.json');
 		for (let i of updatedComment) {
 			if (i.postId == postId) {
 				updatedComment = updatedComment.filter(
 					com => com.commentId != commentId
 				);
-				fs.writeFile('comments.json', JSON.stringify(updatedComment), err => {
-					console.log(err);
-				});
+				writeJsonFile('comments.json', updatedComment);
 			}
 		}
-	});
 	res.redirect('/');
 });
 
@@ -31,11 +24,7 @@ router.post('/admin/deleteComment/:postId/:commentId', function (req, res, next)
 router.post('/admin/editComment/:postId/:commentId', (req, res, next) => {
 	let postId = req.params.postId;
 	let commentId = req.params.commentId;
-	fs.readFile('comments.json', 'utf8', function (err, data) {
-		if (err) {
-			return err;
-		}
-		let fileData = JSON.parse(data);
+	let fileData = readJsonFile('comments.json') 
 		for (let post of fileData) {
 			if (post.postId == postId) {
 				if (post.commentId == commentId) {
@@ -44,8 +33,7 @@ router.post('/admin/editComment/:postId/:commentId', (req, res, next) => {
 				}
 			}
 		}
-		fs.writeFile('comments.json', JSON.stringify(fileData), function () { });
-	});
+		writeJsonFile('comments.json', fileData);
 	res.redirect('/');
 });
 
@@ -53,18 +41,29 @@ router.post('/admin/editComment/:postId/:commentId', (req, res, next) => {
 router.post('/admin/postsWriteComment/:postId', (req, res, next) => {
 	let postId = req.params.postId;
 	let commentId = getRandomInt();
-	fs.readFile('comments.json', 'utf8', function (err, data) {
-		commentsArr = JSON.parse(data);
+	let commentsArr = readJsonFile('comments.json');
 		commentsArr.push({
 			postId: postId,
 			commentId: commentId,
 			text: req.body.writeComment
 		})
-		fs.writeFile('comments.json', JSON.stringify(commentsArr), function () { });
-	})
+		writeJsonFile('comments.json', commentsArr);
 	res.redirect('/');
 });
 
+
+function readJsonFile(jsonFile) {
+	const data = fs.readFileSync(jsonFile,
+		{ encoding: 'utf8', flag: 'r' });
+	let d = JSON.parse(data);
+	return d;
+}
+
+
+function writeJsonFile(jsonFile, arrData) {
+	fs.writeFile(jsonFile, JSON.stringify(arrData), function () { });
+	return jsonFile;
+}
 
 function getRandomInt(min, max) {
 	min = Math.ceil(10);
